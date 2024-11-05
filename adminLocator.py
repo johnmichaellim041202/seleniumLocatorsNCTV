@@ -5,6 +5,8 @@ from selenium import webdriver
 #chrome driver
 from selenium.webdriver.chrome.service import Service
 
+from selenium.webdriver.support import expected_conditions as EC
+
 #-- Chrome
 from  selenium.webdriver.common.by import By
 
@@ -30,12 +32,23 @@ email = "johnmichael@admin.com"
 password = "password"
 
 # Input Email Address
-driver.find_element(By.XPATH, "//input[@id='mat-input-0']").send_keys(email)
-time.sleep(2)
+#driver.find_element(By.XPATH, "//input[@id='mat-input-0']").send_keys(email)
+#time.sleep(2)
+
+EmailAdd = WebDriverWait(driver, 5).until(EC.visibility_of_element_located((By.XPATH, "//input[@id='mat-input-0']")))
+EmailAdd.send_keys(email)
+
+PassInput = WebDriverWait(driver, 5).until(
+    EC.visibility_of_element_located(
+        (By.XPATH, "//input[@id='mat-input-1']")
+    )
+)
+
+PassInput.send_keys(password)
 
 # Input Password
-driver.find_element(By.XPATH, "//input[@id='mat-input-1']").send_keys(password)
-time.sleep(2)
+#driver.find_element(By.XPATH, "//input[@id='mat-input-1']").send_keys(password)
+#time.sleep(2)
 
 # Click the password visibility to see password
 driver.find_element(By.CSS_SELECTOR, "mat-icon[role='img']").click()
@@ -62,7 +75,7 @@ time.sleep(2)
 time.sleep(5)
 
 
-EmailAdd = WebDriverWait()
+
 # //mat-option[@ng-reflect-value='[object Object]']
 
 # //mat-option[@ng-reflect-value='[object Object]']/span/div
